@@ -41,3 +41,8 @@ npm run dev                      # abre em http://localhost:8788
 - `dados-exemplo-2.sql`: mais 5 peças de exemplo (sem preço). Apagar antes dos produtos reais.
 - `public/config.js`: preencher `WHATSAPP` quando o dono passar o número; o botão "Pedir orçamento" aparece sozinho.
 - Servidor de teste local travou uma vez ao mudar o `wrangler.toml`: se acontecer, parar os `workerd` e rodar `npm run dev` de novo.
+
+## Temas (v5)
+- Dois temas no mesmo site: `azul` (azul-marinho e dourado, padrão) e `preto` (preto e cinza com âmbar). Troca pelo botão "Tema" no topo ou pelo endereço `?tema=preto` / `?tema=azul` (o escolhido fica guardado enquanto a aba estiver aberta).
+- `public/tema.js` escolhe o tema antes de a página aparecer; as cores ficam nas variáveis do `:root` e no bloco `TEMA PRETO E CINZA` do `style.css`. O painel `/admin/` não usa os temas.
+- Quando o dono escolher, é só apagar o outro tema (e o botão).
