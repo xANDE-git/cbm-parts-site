@@ -51,6 +51,7 @@ export async function onRequest(context) {
     }
 
     if (url.searchParams.get('destaque') === '1') where.push('p.destaque = 1');
+    if (url.searchParams.get('disponivel') === '1') where.push('p.estoque > 0');
 
     const filtro = where.length ? ` WHERE ${where.join(' AND ')}` : '';
     const pagina = Math.max(1, Number(url.searchParams.get('pagina')) || 1);

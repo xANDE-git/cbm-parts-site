@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CBM Parts | Peças automotivas</title>
-  <meta name="description" content="Catálogo de peças automotivas da Companhia Brasileira de Motores. Busque pelo nome, código ou pelo seu carro.">
+  <meta name="description" content="Catálogo de peças automotivas da Companhia Brasileira de Motores. Busque pelo seu veículo, pelo código ou pelo nome da peça.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#0b1f3a">
+  <meta name="theme-color" content="#070f1d">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/barlow-condensed-latin-800-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -15,54 +16,114 @@
   <header class="topo">
     <div class="container">
       <a class="logo" href="/" aria-label="CBM Parts, página inicial">
-        <img src="/logo.svg" alt="" width="46" height="46">
-        <span class="nome"><strong>CBM <span>PARTS</span></strong><small>Companhia Brasileira de Motores</small></span>
+        <img src="/logo.svg" alt="" width="44" height="44">
+        <span class="nome"><strong>CBM <span>Parts</span></strong><small>Companhia Brasileira de Motores</small></span>
       </a>
-      <nav><a href="/admin/"><span class="longo">Área do administrador</span><span class="curto">Admin</span></a></nav>
+      <nav>
+        <a href="#catalogo">Catálogo</a>
+        <a class="destaque" href="/admin/"><span class="longo">Área do administrador</span><span class="curto">Admin</span></a>
+      </nav>
     </div>
   </header>
 
   <section class="hero">
+    <img class="rotor" src="/rotor.svg" alt="" aria-hidden="true" width="660" height="660">
     <div class="container">
-      <h1>Peças automotivas para <em>veículos leves e pesados</em></h1>
-      <p>Encontre a peça certa pelo nome, pelo código ou pelo carro.</p>
+      <span class="kicker">Companhia Brasileira de Motores</span>
+      <h1 class="display">Peças para <em>leves</em> e <em>pesados</em></h1>
+      <p>Encontre a peça certa pelo seu veículo, pelo código ou pelo nome.</p>
     </div>
   </section>
 
   <section class="busca" aria-label="Buscar peças">
     <div class="container">
-      <form id="form-busca">
-        <label>Nome ou código da peça
-          <input type="search" name="q" placeholder="Ex.: filtro de óleo, EX-0001" autocomplete="off">
-        </label>
-        <label>Montadora
-          <input type="text" name="montadora" placeholder="Ex.: Fiat" autocomplete="off">
-        </label>
-        <label>Modelo
-          <input type="text" name="modelo" placeholder="Ex.: Uno" autocomplete="off">
-        </label>
-        <label>Ano
-          <input type="number" name="ano" placeholder="2014" min="1950" max="2100" inputmode="numeric">
-        </label>
-        <button class="btn ouro" type="submit">Buscar</button>
-      </form>
+      <div class="busca-caixa">
+        <div class="abas-busca" role="tablist">
+          <button type="button" role="tab" data-modo="veiculo" aria-selected="true">Por veículo</button>
+          <button type="button" role="tab" data-modo="nome" aria-selected="false">Por código ou nome</button>
+        </div>
+        <form id="form-veiculo" class="modo-veiculo">
+          <label>Montadora <input type="text" name="montadora" placeholder="Ex.: Volkswagen" autocomplete="off"></label>
+          <label>Modelo <input type="text" name="modelo" placeholder="Ex.: Gol" autocomplete="off"></label>
+          <label>Ano <input type="number" name="ano" placeholder="2014" min="1950" max="2100" inputmode="numeric"></label>
+          <button class="btn ouro grande" type="submit">Buscar peças</button>
+        </form>
+        <form id="form-nome" class="modo-nome" hidden>
+          <label>Código ou nome da peça <input type="search" name="q" placeholder="Ex.: filtro de óleo, EX-0001" autocomplete="off"></label>
+          <button class="btn ouro grande" type="submit">Buscar peças</button>
+        </form>
+      </div>
     </div>
   </section>
 
   <main class="container">
-    <div class="chips" id="chips" aria-label="Categorias"></div>
-    <div class="titulo-secao">
-      <h1 id="titulo">Catálogo de peças</h1>
-      <span class="contagem" id="contagem" aria-live="polite"></span>
+    <div class="diferenciais rev">
+      <div class="dif">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16l1.5-5.5A2 2 0 0 1 8.4 9h7.2a2 2 0 0 1 1.9 1.5L19 16"/><path d="M3.5 16h17v3h-17zM7 19v1.5M17 19v1.5"/><circle cx="7.5" cy="13" r=".6"/><circle cx="16.5" cy="13" r=".6"/></svg>
+        <div><strong>Busca pelo veículo</strong><span>Informe montadora, modelo e ano.</span></div>
+      </div>
+      <div class="dif">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15.5l1.5 1.5L22 14"/></svg>
+        <div><strong>Código à vista</strong><span>Cada peça mostra seu código.</span></div>
+      </div>
+      <div class="dif">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="8" width="12" height="8" rx="1.5"/><path d="M14.5 10.5h4l3 3V16h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg>
+        <div><strong>Linha leve e pesada</strong><span>Peças para vários tipos de veículo.</span></div>
+      </div>
     </div>
-    <div class="grade" id="grade"></div>
-    <div class="paginacao" id="paginacao"></div>
+
+    <div class="secao-titulo rev">
+      <div><span class="kicker">Navegue por</span><h2 class="display">Categorias</h2></div>
+    </div>
+    <div class="categorias" id="categorias"></div>
   </main>
+
+  <section class="faixa-escura" id="destaques-faixa" hidden>
+    <div class="container">
+      <div class="secao-titulo">
+        <div><span class="kicker">Em evidência</span><h2 class="display">Destaques</h2></div>
+      </div>
+      <div class="grade" id="destaques"></div>
+    </div>
+  </section>
+
+  <div class="container" id="catalogo">
+    <div class="secao-titulo rev">
+      <div><span class="kicker">Todos os itens</span><h2 class="display">Catálogo de peças</h2></div>
+    </div>
+    <button class="btn sec btn-filtros" type="button" id="abrir-filtros" aria-expanded="false">Filtros</button>
+    <div class="catalogo">
+      <aside class="filtros" id="filtros" aria-label="Filtros">
+        <label class="check-estoque"><input type="checkbox" id="so-estoque"> Só peças em estoque</label>
+        <div><h3>Categoria</h3><div class="filtro-lista" id="filtro-categorias"></div></div>
+        <div><h3>Marca</h3><div class="filtro-lista" id="filtro-marcas"></div></div>
+        <button type="button" class="limpar" id="limpar">Limpar filtros</button>
+      </aside>
+      <section aria-live="polite">
+        <div class="barra-resultado"><h2 id="titulo-resultado">Todas as peças</h2><span class="contagem" id="contagem"></span></div>
+        <div class="grade" id="grade"></div>
+        <div class="paginacao" id="paginacao"></div>
+      </section>
+    </div>
+  </div>
 
   <footer class="rodape">
     <div class="container">
-      <span><strong>CBM PARTS</strong> · Companhia Brasileira de Motores</span>
-      <span>Telefone, endereço e WhatsApp: a definir com o cliente.</span>
+      <div class="colunas">
+        <div>
+          <div class="marca-rodape"><img src="/logo.svg" alt="" width="52" height="52"><strong>CBM Parts</strong></div>
+          <p>Companhia Brasileira de Motores. Peças automotivas para veículos leves e pesados.</p>
+        </div>
+        <div>
+          <h4>Navegue</h4>
+          <ul><li><a href="#catalogo">Catálogo de peças</a></li><li><a href="/creditos.html">Créditos das imagens</a></li><li><a href="/admin/">Área do administrador</a></li></ul>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <ul><li>Telefone e WhatsApp: a definir com o cliente</li><li>Endereço e horário: a definir com o cliente</li></ul>
+        </div>
+      </div>
+      <div class="fim"><span>© Companhia Brasileira de Motores</span><span>Protótipo em construção</span></div>
     </div>
   </footer>
   <script type="module" src="/catalogo.js"></script>

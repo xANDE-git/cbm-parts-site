@@ -25,3 +25,19 @@ npm run dev                      # abre em http://localhost:8788
 - Definir com o cliente: logo, cores, categorias reais (o Instagram mostra freio, suspensão, embreagem, direção, não só filtros), telefone/WhatsApp, endereço, se vende online ou só mostra o catálogo.
 - Trocar o aviso "Base em construção" e remover `noindex` quando estiver aprovado.
 - Backup periódico do banco (`wrangler d1 export`).
+
+## Publicação (protótipo no ar)
+- Link: https://cbm-parts-prototipo-xandedev.pages.dev (painel em `/admin/`)
+- GitHub: `xANDE-git/cbm-parts-site` (privado). Cada push na `main` publica sozinho.
+- Cloudflare: projeto Pages `cbm-parts-prototipo-xandedev`, banco D1 `cbm-parts` (id no `wrangler.toml`).
+- Login do protótipo: `.tmp/login-producao.txt` (fora do Git). Trocar por login do dono na versão final.
+- **Fotos desligadas:** falta ativar o R2 no painel da Cloudflare (pode pedir cartão), criar o bucket `cbm-parts-fotos` e acrescentar o bloco `[[env.production.r2_buckets]]` no `wrangler.toml`.
+- No banco de produção há 4 peças de exemplo SEM preço, só para o visual. Apagar antes de cadastrar os produtos reais.
+
+## Visual v3 e imagens de exemplo
+- Direção: "industrial premium" (aço + dourado, títulos em Barlow Condensed itálico, texto em Inter, fontes em `public/fonts/`, licença OFL).
+- Referências olhadas: Brembo e Bilstein (escuro, cinematográfico, tipografia condensada), Mann-Filter (busca em destaque). Evitado: o estilo "banners e selos de preço por todo lado" de lojas como Peça Agora.
+- Fotos de exemplo em `public/exemplos/` (Wikimedia Commons; créditos em `public/creditos.html`). Nomes `exemplo-*.jpg` são tratados como "Imagem ilustrativa". Trocar pelas fotos reais.
+- `dados-exemplo-2.sql`: mais 5 peças de exemplo (sem preço). Apagar antes dos produtos reais.
+- `public/config.js`: preencher `WHATSAPP` quando o dono passar o número; o botão "Pedir orçamento" aparece sozinho.
+- Servidor de teste local travou uma vez ao mudar o `wrangler.toml`: se acontecer, parar os `workerd` e rodar `npm run dev` de novo.
