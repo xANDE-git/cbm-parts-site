@@ -1,11 +1,11 @@
 // Escolhe o tema da página antes de ela aparecer (por isso é um arquivo separado, no <head>).
 //  Site dos clientes: "preto" (padrão) ou "azul" (azul e dourado, guardado como alternativa).
-//  Painel do administrador (/admin/): "preto" (igual ao site) ou "oficina" (claro, cores contrárias).
+//  Painel do administrador (/admin/): só "preto".
 // Vale o que vier no endereço (?tema=oficina), depois o último escolhido, depois o padrão.
 (function () {
   var html = document.documentElement;
   var admin = location.pathname.indexOf('/admin') === 0;
-  var opcoes = admin ? ['preto', 'oficina'] : ['preto', 'azul'];
+  var opcoes = admin ? ['preto'] : ['preto', 'azul'];
   var chave = admin ? 'tema-painel' : 'tema';
   var tema = 'preto';
   try {

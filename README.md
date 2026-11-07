@@ -47,3 +47,6 @@ npm run dev                      # abre em http://localhost:8788
 - `public/tema.js` escolhe o tema antes de a página aparecer; as cores ficam nas variáveis do `:root` e no bloco `TEMA PRETO E CINZA` do `style.css`. O painel `/admin/` não usa os temas.
 - Quando o dono escolher, é só apagar o outro tema (e o botão).
 - O botão "Tema" está escondido (`.tema-btn { display: none }` no fim do `style.css`). O azul continua acessível em `?tema=azul`; para voltar a ele como padrão, troque `var tema = 'preto'` por `'azul'` no `tema.js`.
+
+## Painel (escolhido)
+- O painel do administrador usa só o visual preto e cinza, igual ao site. A versão "oficina" (clara, topo amarelo) foi descartada e removida.
