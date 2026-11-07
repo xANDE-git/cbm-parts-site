@@ -1,9 +1,9 @@
 // Escolhe o tema do site: "azul" (azul e dourado) ou "preto" (preto e cinza).
-// Vale o que vier no endereço (?tema=preto), depois o último escolhido, depois "azul".
+// Vale o que vier no endereço (?tema=preto), depois o último escolhido, depois "preto" (padrão).
 (function () {
   var html = document.documentElement;
   if (!document.querySelector('.painel') && location.pathname.indexOf('/admin') !== 0) {
-    var tema = 'azul';
+    var tema = 'preto';
     try {
       var url = new URLSearchParams(location.search).get('tema');
       if (url === 'preto' || url === 'azul') sessionStorage.setItem('tema', url);

@@ -43,6 +43,7 @@ npm run dev                      # abre em http://localhost:8788
 - Servidor de teste local travou uma vez ao mudar o `wrangler.toml`: se acontecer, parar os `workerd` e rodar `npm run dev` de novo.
 
 ## Temas (v5)
-- Dois temas no mesmo site: `azul` (azul-marinho e dourado, padrão) e `preto` (preto e cinza com âmbar). Troca pelo botão "Tema" no topo ou pelo endereço `?tema=preto` / `?tema=azul` (o escolhido fica guardado enquanto a aba estiver aberta).
+- Dois temas no mesmo site: `azul` (azul-marinho e dourado, guardado como alternativa) e `preto` (preto e cinza com âmbar, **padrão escolhido**). Troca pelo botão "Tema" no topo ou pelo endereço `?tema=preto` / `?tema=azul` (o escolhido fica guardado enquanto a aba estiver aberta).
 - `public/tema.js` escolhe o tema antes de a página aparecer; as cores ficam nas variáveis do `:root` e no bloco `TEMA PRETO E CINZA` do `style.css`. O painel `/admin/` não usa os temas.
 - Quando o dono escolher, é só apagar o outro tema (e o botão).
+- O botão "Tema" está escondido (`.tema-btn { display: none }` no fim do `style.css`). O azul continua acessível em `?tema=azul`; para voltar a ele como padrão, troque `var tema = 'preto'` por `'azul'` no `tema.js`.

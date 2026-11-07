@@ -365,3 +365,7 @@ html[data-tema="preto"] {
 [data-tema="preto"] .kicker { color: var(--ouro); }
 [data-tema="preto"] .cartao .cat-nome { color: var(--ouro); }
 [data-tema="preto"] .creditos a { color: var(--ouro-claro); }
+
+/* O botão de trocar tema fica escondido para o cliente ver só o preto.
+   Para mostrar de novo, apague a linha abaixo. O tema azul continua em ?tema=azul. */
+.tema-btn { display: none; }
