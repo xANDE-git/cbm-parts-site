@@ -1,0 +1,28 @@
+name = "cbm-parts"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "public"
+
+# ---- Teste no PC (npm run dev) ----
+[[d1_databases]]
+binding = "DB"
+database_name = "cbm-parts"
+database_id = "b300eba9-2555-4c4e-b554-5be80410d432"
+
+[[r2_buckets]]
+binding = "FOTOS"
+bucket_name = "cbm-parts-fotos"
+
+# ---- Site no ar ----
+# As fotos (R2) só entram aqui depois de ativar o R2 na Cloudflare e criar o bucket "cbm-parts-fotos".
+# Aí é só acrescentar o bloco [[env.production.r2_buckets]] igual ao de cima.
+[env.production]
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "cbm-parts"
+database_id = "b300eba9-2555-4c4e-b554-5be80410d432"
+
+[env.preview]
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "cbm-parts"
+database_id = "b300eba9-2555-4c4e-b554-5be80410d432"

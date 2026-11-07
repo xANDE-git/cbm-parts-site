@@ -1,0 +1,16 @@
+{
+  "name": "cbm-parts-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev --local --port 8788",
+    "db:criar": "wrangler d1 execute cbm-parts --local --file=schema.sql",
+    "db:exemplo": "wrangler d1 execute cbm-parts --local --file=dados-exemplo.sql",
+    "db:criar:producao": "wrangler d1 execute cbm-parts --remote --file=schema.sql",
+    "admin": "node scripts/criar-admin.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

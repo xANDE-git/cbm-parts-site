@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel | CBM Parts</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0b1f3a">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="painel">
+  <header class="topo">
+    <div class="container">
+      <a class="logo" href="/admin/"><img src="/logo.svg" alt="" width="46" height="46"><span class="nome"><strong>CBM <span>PAINEL</span></strong><small>Área do administrador</small></span></a>
+      <nav id="nav-topo" hidden>
+        <a href="/" target="_blank" rel="noopener">Ver o site</a>
+        <a href="#" id="sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- LOGIN -->
+    <section id="tela-login" class="login" hidden>
+      <img src="/logo.svg" alt="" width="64" height="64"><h1>Entrar no painel</h1><p class="sub">Acesso restrito ao administrador.</p>
+      <form id="form-login">
+        <label>E-mail <input type="email" name="email" required autocomplete="username"></label>
+        <label>Senha <input type="password" name="senha" required autocomplete="current-password"></label>
+        <p class="msg-erro" id="erro-login" role="alert"></p>
+        <button class="btn" type="submit">Entrar</button>
+      </form>
+    </section>
+
+    <!-- PAINEL -->
+    <section id="tela-painel" hidden>
+      <div class="resumo" id="resumo"></div>
+      <div class="abas" role="tablist">
+        <button role="tab" data-aba="pecas" aria-selected="true">Peças</button>
+        <button role="tab" data-aba="categorias" aria-selected="false">Categorias</button>
+        <button role="tab" data-aba="marcas" aria-selected="false">Marcas</button>
+      </div>
+
+      <div id="aba-pecas">
+        <div class="barra">
+          <input type="search" id="filtro-pecas" placeholder="Buscar por nome ou código" autocomplete="off">
+          <button class="btn" id="nova-peca">+ Nova peça</button>
+        </div>
+        <div class="tabela-rolagem">
+          <table class="tabela" id="tabela-pecas">
+            <thead><tr><th>Foto</th><th>Código</th><th>Peça</th><th>Preço</th><th>Estoque</th><th>Situação</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="paginacao" id="pag-pecas"></div>
+      </div>
+
+      <div id="aba-categorias" hidden></div>
+      <div id="aba-marcas" hidden></div>
+    </section>
+  </main>
+
+  <!-- FORMULÁRIO DE PEÇA -->
+  <dialog id="dlg-peca">
+    <form id="form-peca" method="dialog">
+      <h2 id="titulo-peca">Nova peça</h2>
+      <div class="campos">
+        <label>Código *<input name="codigo" required maxlength="60"></label>
+        <label>Nome *<input name="nome" required maxlength="150"></label>
+        <label>Preço (R$)<input name="preco" inputmode="decimal" placeholder="Vazio = “Consulte”"></label>
+        <label>Quantidade em estoque<input name="estoque" type="number" min="0" step="1" value="0"></label>
+        <label>Categoria<select name="categoria_id"></select></label>
+        <label>Marca<select name="marca_id"></select></label>
+        <label class="larga">Descrição<textarea name="descricao" rows="3" maxlength="4000"></textarea></label>
+        <div class="larga foto-campo">
+          <div class="mini" id="previa-foto">Sem foto</div>
+          <div>
+            <label>Foto (JPG, PNG ou WebP, até 3 MB)<input type="file" id="arquivo-foto" accept="image/jpeg,image/png,image/webp"></label>
+            <button type="button" class="btn sec pequeno" id="remover-foto" hidden>Remover foto</button>
+          </div>
+        </div>
+        <label class="check"><input type="checkbox" name="ativo" checked> Mostrar no site</label>
+        <label class="check"><input type="checkbox" name="destaque"> Destaque (aparece primeiro)</label>
+      </div>
+
+      <h3>Carros compatíveis</h3>
+      <div id="aplicacoes"></div>
+      <button type="button" class="btn sec pequeno" id="add-aplicacao">+ Adicionar carro</button>
+
+      <p class="msg-erro" id="erro-peca" role="alert"></p>
+      <div class="acoes">
+        <button type="button" class="btn sec" id="cancelar-peca">Cancelar</button>
+        <button type="submit" class="btn">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/admin/admin.js"></script>
+</body>
+</html>

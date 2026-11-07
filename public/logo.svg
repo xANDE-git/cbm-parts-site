@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="CBM">
+  <defs>
+    <linearGradient id="o" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e9c85a"/>
+      <stop offset="1" stop-color="#a87f16"/>
+    </linearGradient>
+  </defs>
+  <!-- engrenagem: anel com dentes -->
+  <circle cx="32" cy="32" r="29.5" fill="none" stroke="url(#o)" stroke-width="5" stroke-dasharray="4.1 3.2"/>
+  <circle cx="32" cy="32" r="27" fill="#0b1f3a" stroke="url(#o)" stroke-width="2"/>
+  <circle cx="32" cy="32" r="22.5" fill="none" stroke="#e9c85a" stroke-opacity=".35" stroke-width=".8"/>
+  <text x="32" y="38.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="19" letter-spacing="-.5" fill="#fff">CBM</text>
+  <rect x="19" y="43" width="26" height="1.6" rx=".8" fill="url(#o)"/>
+</svg>

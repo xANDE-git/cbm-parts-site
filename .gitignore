@@ -1,0 +1,7 @@
+node_modules/
+.wrangler/
+.tmp/
+.dev.vars
+.claude/
+*.mp4
+para-enviar/

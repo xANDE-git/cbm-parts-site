@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CBM Parts | Peças automotivas</title>
+  <meta name="description" content="Catálogo de peças automotivas da Companhia Brasileira de Motores. Busque pelo nome, código ou pelo seu carro.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b1f3a">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="faixa-aviso">Protótipo em construção. Produtos, preços e textos ainda não são os finais.</div>
+  <header class="topo">
+    <div class="container">
+      <a class="logo" href="/" aria-label="CBM Parts, página inicial">
+        <img src="/logo.svg" alt="" width="46" height="46">
+        <span class="nome"><strong>CBM <span>PARTS</span></strong><small>Companhia Brasileira de Motores</small></span>
+      </a>
+      <nav><a href="/admin/"><span class="longo">Área do administrador</span><span class="curto">Admin</span></a></nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Peças automotivas para <em>veículos leves e pesados</em></h1>
+      <p>Encontre a peça certa pelo nome, pelo código ou pelo carro.</p>
+    </div>
+  </section>
+
+  <section class="busca" aria-label="Buscar peças">
+    <div class="container">
+      <form id="form-busca">
+        <label>Nome ou código da peça
+          <input type="search" name="q" placeholder="Ex.: filtro de óleo, EX-0001" autocomplete="off">
+        </label>
+        <label>Montadora
+          <input type="text" name="montadora" placeholder="Ex.: Fiat" autocomplete="off">
+        </label>
+        <label>Modelo
+          <input type="text" name="modelo" placeholder="Ex.: Uno" autocomplete="off">
+        </label>
+        <label>Ano
+          <input type="number" name="ano" placeholder="2014" min="1950" max="2100" inputmode="numeric">
+        </label>
+        <button class="btn ouro" type="submit">Buscar</button>
+      </form>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="chips" id="chips" aria-label="Categorias"></div>
+    <div class="titulo-secao">
+      <h1 id="titulo">Catálogo de peças</h1>
+      <span class="contagem" id="contagem" aria-live="polite"></span>
+    </div>
+    <div class="grade" id="grade"></div>
+    <div class="paginacao" id="paginacao"></div>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <span><strong>CBM PARTS</strong> · Companhia Brasileira de Motores</span>
+      <span>Telefone, endereço e WhatsApp: a definir com o cliente.</span>
+    </div>
+  </footer>
+  <script type="module" src="/catalogo.js"></script>
+</body>
+</html>
