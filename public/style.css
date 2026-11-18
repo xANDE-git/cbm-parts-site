@@ -369,3 +369,5 @@ html[data-tema="preto"] {
 /* O botão de trocar tema fica escondido para o cliente ver só o preto.
    Para mostrar de novo, apague a linha abaixo. O tema azul continua em ?tema=azul. */
 .tema-btn { display: none; }
+
+.xm-logo{display:flex;justify-content:center;width:fit-content;margin:0 auto;padding:14px 12px 4px;color:inherit;opacity:.32;transition:opacity .2s}.xm-logo:hover,.xm-logo:focus-visible{opacity:.85}
