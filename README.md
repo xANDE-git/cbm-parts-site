@@ -1,52 +1,54 @@
-# CBM Parts: catálogo com painel (base nível 1)
+# CBM Parts
 
-Catálogo de peças com área de administrador. **Base provisória**: visual, textos e produtos ainda não foram combinados com o dono.
+Catálogo de autopeças com busca por veículo e painel de administrador. Feito para a loja de um colega, ainda em teste: visual, textos e produtos não foram fechados com o dono.
+
+**Protótipo no ar:** https://cbm-parts-prototipo-xandedev.pages.dev/ (painel em `/admin/`)
+
+## O que é e para quem
+
+Site de catálogo para uma loja de autopeças. O cliente procura a peça pelo carro (montadora, modelo e ano) ou pelo nome ou código. A loja cadastra e edita as peças por um painel protegido por login.
 
 ## Como funciona
-- `public/`: o site (vitrine em `/`, peça em `/peca.html?id=`, painel em `/admin/`).
-- `functions/`: a API (roda na Cloudflare). Login, peças, categorias, marcas e upload de fotos.
-- Banco: Cloudflare D1 (`schema.sql`). Fotos: Cloudflare R2.
 
-## Rodar no seu PC
+Exemplo: o cliente busca "Gol", ano 2014.
+1. O navegador chama `/api/pecas?modelo=Gol&ano=2014`.
+2. A Function (`functions/api/pecas/index.js`) consulta o banco D1 e devolve só as peças que servem nesse carro.
+3. A página mostra a lista; ao abrir uma peça, aparece a tabela de aplicações (montadora, modelo, ano, motor).
+
+## Funcionalidades
+
+- Busca por veículo (montadora, modelo, ano) e por nome ou código da peça
+- Página de cada peça com a tabela de aplicações
+- Login e logout do administrador (sessão em cookie)
+- Painel `/admin/`: cadastro, edição e remoção de peças, categorias e marcas
+- Upload de fotos pela API, guardadas no R2 (ainda não ligado no site no ar)
+
+## Stack
+
+- **Cloudflare Pages:** hospeda o site e as Functions
+- **Cloudflare Pages Functions** (JavaScript): a API
+- **Cloudflare D1:** banco SQL (`schema.sql`)
+- **Cloudflare R2:** armazenamento das fotos
+- **JavaScript puro** no front, sem framework; **Wrangler** (CLI da Cloudflare) para rodar local
+
+## Como rodar no PC
+
 ```bash
 npm install
-npm run db:criar                 # cria as tabelas (local)
-npm run db:exemplo               # opcional: peças de exemplo
+npm run db:criar        # cria as tabelas (local)
+npm run db:exemplo      # opcional: peças de exemplo
 node scripts/criar-admin.mjs email "Nome" "senha-de-12+-caracteres"
 npx wrangler d1 execute cbm-parts --local --file=.tmp/admin.sql
-npm run dev                      # abre em http://localhost:8788
+npm run dev             # abre em http://localhost:8788
 ```
 
-## Antes de publicar de verdade (pendências)
-- Criar o banco D1 e o bucket R2 na Cloudflare e colocar o `database_id` real no `wrangler.toml`.
-- Ligar o R2 na conta (pode pedir cartão de crédito, mesmo com uso gratuito).
-- Criar o admin do dono com senha forte (`--remote`). Nunca usar o admin de teste.
-- NÃO publicar `dados-exemplo.sql`.
-- Definir com o cliente: logo, cores, categorias reais (o Instagram mostra freio, suspensão, embreagem, direção, não só filtros), telefone/WhatsApp, endereço, se vende online ou só mostra o catálogo.
-- Trocar o aviso "Base em construção" e remover `noindex` quando estiver aprovado.
-- Backup periódico do banco (`wrangler d1 export`).
+## Status
 
-## Publicação (protótipo no ar)
-- Link: https://cbm-parts-prototipo-xandedev.pages.dev (painel em `/admin/`)
-- GitHub: `xANDE-git/cbm-parts-site` (privado). Cada push na `main` publica sozinho.
-- Cloudflare: projeto Pages `cbm-parts-prototipo-xandedev`, banco D1 `cbm-parts` (id no `wrangler.toml`).
-- Login do protótipo: `.tmp/login-producao.txt` (fora do Git). Trocar por login do dono na versão final.
-- **Fotos desligadas:** falta ativar o R2 no painel da Cloudflare (pode pedir cartão), criar o bucket `cbm-parts-fotos` e acrescentar o bloco `[[env.production.r2_buckets]]` no `wrangler.toml`.
-- No banco de produção há 4 peças de exemplo SEM preço, só para o visual. Apagar antes de cadastrar os produtos reais.
+Protótipo em teste, com 4 peças de exemplo sem preço no banco de produção. Falta, antes do uso real:
+- ligar o R2 (fotos) e criar o administrador do dono;
+- trocar o conteúdo de exemplo por logo, categorias, peças e contatos reais (o WhatsApp está em `public/config.js`);
+- não rodar `dados-exemplo.sql` e `dados-exemplo-2.sql` no banco de produção.
 
-## Visual v3 e imagens de exemplo
-- Direção: "industrial premium" (aço + dourado, títulos em Barlow Condensed itálico, texto em Inter, fontes em `public/fonts/`, licença OFL).
-- Referências olhadas: Brembo e Bilstein (escuro, cinematográfico, tipografia condensada), Mann-Filter (busca em destaque). Evitado: o estilo "banners e selos de preço por todo lado" de lojas como Peça Agora.
-- Fotos de exemplo em `public/exemplos/` (Wikimedia Commons; créditos em `public/creditos.html`). Nomes `exemplo-*.jpg` são tratados como "Imagem ilustrativa". Trocar pelas fotos reais.
-- `dados-exemplo-2.sql`: mais 5 peças de exemplo (sem preço). Apagar antes dos produtos reais.
-- `public/config.js`: preencher `WHATSAPP` quando o dono passar o número; o botão "Pedir orçamento" aparece sozinho.
-- Servidor de teste local travou uma vez ao mudar o `wrangler.toml`: se acontecer, parar os `workerd` e rodar `npm run dev` de novo.
+## Como foi feito
 
-## Temas (v5)
-- Dois temas no mesmo site: `azul` (azul-marinho e dourado, guardado como alternativa) e `preto` (preto e cinza com âmbar, **padrão escolhido**). Troca pelo botão "Tema" no topo ou pelo endereço `?tema=preto` / `?tema=azul` (o escolhido fica guardado enquanto a aba estiver aberta).
-- `public/tema.js` escolhe o tema antes de a página aparecer; as cores ficam nas variáveis do `:root` e no bloco `TEMA PRETO E CINZA` do `style.css`. O painel `/admin/` não usa os temas.
-- Quando o dono escolher, é só apagar o outro tema (e o botão).
-- O botão "Tema" está escondido (`.tema-btn { display: none }` no fim do `style.css`). O azul continua acessível em `?tema=azul`; para voltar a ele como padrão, troque `var tema = 'preto'` por `'azul'` no `tema.js`.
-
-## Painel (escolhido)
-- O painel do administrador usa só o visual preto e cinza, igual ao site. A versão "oficina" (clara, topo amarelo) foi descartada e removida.
+Desenvolvido por mim com apoio do Claude Code. Eu defini os requisitos (busca por carro, login, painel para a loja), testei e ajustei o que a IA gerou. Não escrevi o código à mão do zero. As fotos de exemplo são do Wikimedia Commons, com créditos em `public/creditos.html`.
